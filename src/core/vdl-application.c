@@ -104,13 +104,41 @@ vdl_application_shutdown (GApplication *app)
     G_APPLICATION_CLASS (vdl_application_parent_class)->shutdown (app);
 }
 
+static int
+vdl_application_command_line (GApplication            *app,
+                              GApplicationCommandLine *cmdline)
+{
+    VdlApplication *self = VDL_APPLICATION (app);
+    gchar **argv = g_application_command_line_get_arguments (cmdline, NULL);
+
+    /* Create/present window first */
+    if (self->main_window == NULL) {
+        self->main_window = vdl_main_window_new (self);
+    }
+    gtk_window_present (GTK_WINDOW (self->main_window));
+
+    /* Check for --add-url arg */
+    for (int i = 1; argv != NULL && argv[i] != NULL; i++) {
+        if (g_strcmp0 (argv[i], "--add-url") == 0 && argv[i+1] != NULL) {
+            const char *url = argv[i+1];
+            vdl_logger_info ("Received command line URL: %s", url);
+            vdl_main_window_show_add_dialog (self->main_window, url);
+            break;
+        }
+    }
+
+    g_strfreev (argv);
+    return 0;
+}
+
 static void
 vdl_application_class_init (VdlApplicationClass *klass)
 {
     GApplicationClass *app_class = G_APPLICATION_CLASS (klass);
-    app_class->activate = vdl_application_activate;
-    app_class->startup  = vdl_application_startup;
-    app_class->shutdown = vdl_application_shutdown;
+    app_class->activate     = vdl_application_activate;
+    app_class->startup      = vdl_application_startup;
+    app_class->shutdown     = vdl_application_shutdown;
+    app_class->command_line = vdl_application_command_line;
 }
 
 static void
@@ -129,7 +157,7 @@ vdl_application_new (void)
 {
     return g_object_new (VDL_TYPE_APPLICATION,
                          "application-id", VDL_APP_ID,
-                         "flags", G_APPLICATION_DEFAULT_FLAGS,
+                         "flags", G_APPLICATION_HANDLES_COMMAND_LINE,
                          NULL);
 }
 

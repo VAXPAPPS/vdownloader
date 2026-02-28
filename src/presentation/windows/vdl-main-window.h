@@ -14,6 +14,7 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (VdlMainWindow, vdl_main_window, VDL, MAIN_WINDOW, AdwApplicationWindow)
 
 VdlMainWindow *vdl_main_window_new (VdlApplication *app);
+void           vdl_main_window_show_add_dialog (VdlMainWindow *self, const char *url);
 
 G_END_DECLS
 

@@ -434,13 +434,30 @@ on_cancel_download (VdlDownloadsView *view, const char *id, gpointer user_data)
     gtk_label_set_text (GTK_LABEL (self->active_count_label), ac);
 }
 
-/* ── Add Download Button ── */
+/* ── Add Download ── */
 static void
 on_add_download_clicked (GtkButton *btn, gpointer user_data)
 {
     (void)btn;
     VdlMainWindow *self = VDL_MAIN_WINDOW (user_data);
+    vdl_main_window_show_add_dialog (self, NULL);
+}
+
+void
+vdl_main_window_show_add_dialog (VdlMainWindow *self, const char *url)
+{
+    g_return_if_fail (VDL_IS_MAIN_WINDOW (self));
+
     VdlAddDownloadDialog *dialog = vdl_add_download_dialog_new (GTK_WINDOW (self));
+    
+    if (url) {
+        /* Set the URL in the dialog's entry if provided */
+        GtkWidget *entry = g_object_get_data (G_OBJECT (dialog), "url_entry");
+        if (entry) {
+            gtk_editable_set_text (GTK_EDITABLE (entry), url);
+        }
+    }
+
     g_signal_connect (dialog, "download-requested",
                       G_CALLBACK (on_download_requested), self);
     gtk_window_present (GTK_WINDOW (dialog));

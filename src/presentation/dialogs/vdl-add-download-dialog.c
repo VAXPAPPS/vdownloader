@@ -142,6 +142,7 @@ vdl_add_download_dialog_init (VdlAddDownloadDialog *self)
     gtk_box_append (GTK_BOX (vbox), url_label);
 
     self->url_entry = gtk_entry_new ();
+    g_object_set_data (G_OBJECT (self), "url_entry", self->url_entry);
     gtk_entry_set_placeholder_text (GTK_ENTRY (self->url_entry),
         "https://example.com/file.zip");
     g_signal_connect (self->url_entry, "changed",
