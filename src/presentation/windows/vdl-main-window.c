@@ -650,7 +650,7 @@ vdl_main_window_new (VdlApplication *app)
     GtkWidget *add_btn = gtk_button_new_with_label ("+ New Download");
     gtk_widget_add_css_class (add_btn, "vdl-btn-primary");
     g_signal_connect (add_btn, "clicked", G_CALLBACK (on_add_download_clicked), self);
-    gtk_box_append (GTK_BOX (vdl_headerbar_get_end_box (self->headerbar)), add_btn);
+    gtk_box_append (GTK_BOX (vdl_headerbar_get_start_box (self->headerbar)), add_btn);
 
     /* Main layout */
     GtkWidget *hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);

@@ -62,7 +62,7 @@
 
 ### 🎨 Design
 - **Glassmorphism UI** — 60% transparent dark background
-- **macOS-style window controls** — colored close/minimize/maximize dots
+- **vaxpOS-style window controls** — colored close/minimize/maximize dots
 - **Sidebar navigation** — Dashboard, Downloads, Torrents, Statistics, Settings
 - **Smooth transitions** — crossfade view switching
 - **Custom CSS theme** — premium dark mode with purple/indigo accents
@@ -246,7 +246,7 @@ Vdownloader/
 
 Vdownloader is part of the [VAXP-OS](https://github.com/VAXPAPPS) application ecosystem, following the same Glassmorphism design language with:
 - 60% transparent dark backgrounds
-- macOS-style colored window control dots
+- vaxpOS-style colored window control dots
 - Purple/indigo accent gradient (#6366f1 → #4f46e5)
 
 ---
