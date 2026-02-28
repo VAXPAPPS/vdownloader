@@ -258,6 +258,6 @@ This project is licensed under the **GPL-3.0 License** — see the [LICENSE](LIC
 ---
 
 <p align="center">
-  <strong>Built with ❤️ for VAXP-OS</strong><br/>
+  <strong>Built for VAXP-OS</strong><br/>
   <em>© 2026 VAXP Team</em>
 </p>
