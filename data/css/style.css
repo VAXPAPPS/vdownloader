@@ -152,7 +152,7 @@ Vdownloader .vdl-sidebar-item {
    Content Area
    ═══════════════════════════════════════════════════ */
 .vdl-content {
-    background-color: rgba(10, 10, 20, 0.50);
+    background-color: rgba(3, 3, 3, 0);
     padding: 0;
 }
 
