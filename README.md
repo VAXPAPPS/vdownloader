@@ -261,4 +261,3 @@ This project is licensed under the **GPL-3.0 License** — see the [LICENSE](LIC
   <strong>Built with ❤️ for VAXP-OS</strong><br/>
   <em>© 2026 VAXP Team</em>
 </p>
-# vdownloader
