@@ -4,6 +4,6 @@
     "path": "/usr/lib/vxap-downloader/vdl-native-host.py",
     "type": "stdio",
     "allowed_origins": [
-        "chrome-extension://APPLICATION_ID_HERE/"
+        "chrome-extension://cgalmocjpjgbgccbmefjggeanbeeakfe/"
     ]
 }
