@@ -88,13 +88,45 @@ on_show_folder_clicked (GtkButton *btn, gpointer user_data)
 {
     (void)btn;
     VdlDownloadRow *self = VDL_DOWNLOAD_ROW (user_data);
-    g_autofree char *uri = g_filename_to_uri (self->save_path, NULL, NULL);
+    
+    if (!self->save_path) return;
+    
+    // The downloaded file path
+    g_autofree char *filepath = g_build_filename (self->save_path, 
+                                        gtk_label_get_text (GTK_LABEL (self->filename_label)), 
+                                        NULL);
+    g_autofree char *uri = g_filename_to_uri (filepath, NULL, NULL);
+
     if (uri) {
-        GtkUriLauncher *launcher = gtk_uri_launcher_new (uri);
-        gtk_uri_launcher_launch (launcher,
-            GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
-            NULL, NULL, NULL);
-        g_object_unref (launcher);
+        GDBusConnection *bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
+        gboolean dbus_success = FALSE;
+
+        if (bus) {
+            GVariantBuilder builder;
+            g_variant_builder_init (&builder, G_VARIANT_TYPE ("as"));
+            g_variant_builder_add (&builder, "s", uri);
+            
+            // Try FreeDesktop FileManager1 interface to highlight the file
+            GVariant *result = g_dbus_connection_call_sync (bus,
+                "org.freedesktop.FileManager1",
+                "/org/freedesktop/FileManager1",
+                "org.freedesktop.FileManager1",
+                "ShowItems",
+                g_variant_new ("(@ass)", g_variant_builder_end (&builder), ""),
+                NULL, G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL);
+                
+            if (result) {
+                g_variant_unref (result);
+                dbus_success = TRUE;
+            }
+            g_object_unref (bus);
+        }
+
+        if (!dbus_success) {
+            // Fallback: Just open the folder using xdg-open
+            g_autofree char *cmd = g_strdup_printf ("xdg-open \"%s\"", self->save_path);
+            g_spawn_command_line_async (cmd, NULL);
+        }
     }
 }
 
