@@ -1,0 +1,13 @@
+Package: vxap-downloader-dbgsym
+Package-Type: ddeb
+Source: vxap-downloader
+Version: 1.0.0-1
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: VAXP Team <team@vaxp.org>
+Installed-Size: 698
+Depends: vxap-downloader (= 1.0.0-1)
+Section: debug
+Priority: optional
+Description: debug symbols for vxap-downloader
+Build-Ids: efff79e540ff75a4692e7eb9023f5028e9ae919b

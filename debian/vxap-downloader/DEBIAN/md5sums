@@ -1,0 +1,14 @@
+e5c62f3712af8df3a73fb8e36e3614fb  usr/bin/vxap-downloader
+fac5970dbbfdba47ca683ac86c5a4e5c  usr/lib/mozilla/native-messaging-hosts/org.vaxp.downloader.json
+14b4d29a7a04cd04ad0fa41a9ece0d82  usr/lib/vxap-downloader/vdl-native-host.py
+8814f08a512c970bc25003d58813f095  usr/share/applications/org.vaxp.downloader.desktop
+d12001218f75f5f51560f20c7ca0a3a4  usr/share/doc/vxap-downloader/changelog.Debian.gz
+91bca51fdc1c1880f9fecd06847a5f47  usr/share/doc/vxap-downloader/copyright
+f5b1e26338473baf2e1e7f0543b948b6  usr/share/icons/hicolor/scalable/apps/org.vaxp.downloader.svg
+088d2a90d2e7d56021766d6f45c766a7  usr/share/vxap-downloader/extension/background.js
+2ca21df7499d80934455bc017e647afe  usr/share/vxap-downloader/extension/content.js
+f5b1e26338473baf2e1e7f0543b948b6  usr/share/vxap-downloader/extension/icons/icon128.svg
+cc7d39ef3a362af114e53255e6e65e04  usr/share/vxap-downloader/extension/manifest.json
+6a7fb56e31528494c60256399b97cc7d  usr/share/vxap-downloader/extension/popup.css
+e1ce5ff932ad733ed919c03e58cd94ab  usr/share/vxap-downloader/extension/popup.html
+4a130d35922b1e6001c27da974c4426e  usr/share/vxap-downloader/extension/popup.js

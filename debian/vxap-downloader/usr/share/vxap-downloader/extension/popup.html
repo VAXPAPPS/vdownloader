@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vdownloader</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup">
+    <div class="header">
+      <img src="icons/icon48.png" alt="V" class="logo">
+      <div class="header-text">
+        <h1>Vdownloader</h1>
+        <span class="version">v1.0.0</span>
+      </div>
+      <div class="status-dot" id="statusDot"></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="toggle-row">
+      <span>Extension Enabled</span>
+      <label class="switch">
+        <input type="checkbox" id="enableToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="toggle-row">
+      <span>Intercept Downloads</span>
+      <label class="switch">
+        <input type="checkbox" id="interceptToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="url-section">
+      <input type="text" id="urlInput" placeholder="Paste download URL...">
+      <button id="downloadBtn" class="btn-primary">
+        <span>⬇</span> Download
+      </button>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="footer">
+      <span class="connection" id="connectionStatus">● Disconnected</span>
+      <a href="#" id="settingsLink">Settings</a>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
