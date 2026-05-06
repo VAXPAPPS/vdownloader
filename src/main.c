@@ -1,13 +1,10 @@
-/*
- * VXAPDownloader - Professional Download Manager for VAXP-OS
- * Copyright (C) 2026 VAXP Organization
- */
-
-#include "core/vdl-application.h"
+#include "app/vxap_app.h"
 
 int
 main (int argc, char *argv[])
 {
-    g_autoptr(VdlApplication) app = vdl_application_new ();
-    return g_application_run (G_APPLICATION (app), argc, argv);
+    VxapApp *app = vxap_app_new ();
+    int status = g_application_run (G_APPLICATION(app), argc, argv);
+    g_object_unref (app);
+    return status;
 }

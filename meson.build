@@ -1,132 +1,79 @@
-project('vxap-downloader', ['c', 'cpp'],
+project('vxap-downloader', 'c',
   version: '1.0.0',
-  license: 'GPL-3.0',
-  meson_version: '>= 0.59.0',
+  meson_version: '>= 0.60.0',
   default_options: [
-    'c_std=gnu17',
-    'cpp_std=c++17',
+    'c_std=c17',
     'warning_level=2',
-  ],
+  ]
 )
 
-app_id = 'org.vaxp.downloader'
+cc = meson.get_compiler('c')
 
 # Dependencies
 gtk4_dep = dependency('gtk4', version: '>= 4.6')
-libadwaita_dep = dependency('libadwaita-1', version: '>= 1.2')
-libcurl_dep = dependency('libcurl', version: '>= 7.68')
-sqlite3_dep = dependency('sqlite3', version: '>= 3.31')
-libnotify_dep = dependency('libnotify', version: '>= 0.7')
-threads_dep = dependency('threads')
-json_glib_dep = dependency('json-glib-1.0')
-openssl_dep = dependency('openssl', version: '>= 1.1')
-libtorrent_dep = dependency('libtorrent-rasterbar', version: '>= 2.0')
+adw_dep  = dependency('libadwaita-1', version: '>= 1.2', required: false)
+curl_dep = dependency('libcurl', version: '>= 7.68')
+json_dep = dependency('json-glib-1.0', version: '>= 1.6')
+notify_dep = dependency('libnotify', version: '>= 0.7', required: false)
 
-cc = meson.get_compiler('c')
-math_dep = cc.find_library('m', required: true)
+deps = [gtk4_dep, curl_dep, json_dep]
 
-# GResource compilation
+if adw_dep.found()
+  deps += [adw_dep]
+  add_project_arguments('-DHAVE_ADWAITA', language: 'c')
+endif
+
+if notify_dep.found()
+  deps += [notify_dep]
+  add_project_arguments('-DHAVE_LIBNOTIFY', language: 'c')
+endif
+
+add_project_arguments('-DAPP_ID="com.vxap.downloader"', language: 'c')
+add_project_arguments('-DAPP_VERSION="' + meson.project_version() + '"', language: 'c')
+
+# GResources
 gnome = import('gnome')
-
 resources = gnome.compile_resources(
-  'vdl-resources',
-  'data/org.vaxp.downloader.gresource.xml',
-  source_dir: 'data',
-  c_name: 'vdl',
+  'vxap-resources',
+  'resources/vxap.gresource.xml',
+  source_dir: 'resources',
+  c_name: 'vxap'
 )
 
-# C source files
-core_sources = files(
-  'src/core/vdl-application.c',
-  'src/core/vdl-config.c',
-  'src/core/vdl-logger.c',
-  'src/core/vdl-utils.c',
-)
-
-domain_sources = files(
-  'src/domain/entities/vdl-download-item.c',
-  'src/domain/entities/vdl-category.c',
-)
-
-data_sources = files(
-  'src/data/repositories/vdl-sqlite-repo.c',
-  'src/data/migrations/vdl-db-migration.c',
-)
-
-engine_c_sources = files(
-  'src/engine/http/vdl-http-engine.c',
-  'src/engine/http/vdl-segment.c',
-  'src/engine/http/vdl-chunk-manager.c',
-  'src/engine/http/vdl-speed-limiter.c',
-  'src/engine/scheduler/vdl-queue-manager.c',
-  'src/engine/scheduler/vdl-scheduler.c',
-)
-
-# C++ source files (libtorrent wrapper)
-engine_cpp_sources = files(
-  'src/engine/torrent/vdl-torrent-engine.cpp',
-)
-
-services_sources = files(
-  'src/services/vdl-clipboard-monitor.c',
-  'src/services/vdl-notification-service.c',
-  'src/services/vdl-checksum-verifier.c',
-)
-
-presentation_sources = files(
-  'src/presentation/windows/vdl-main-window.c',
-  'src/presentation/views/vdl-downloads-view.c',
-  'src/presentation/views/vdl-categories-view.c',
-  'src/presentation/views/vdl-statistics-view.c',
-  'src/presentation/views/vdl-torrents-view.c',
-  'src/presentation/widgets/vdl-download-row.c',
-  'src/presentation/widgets/vdl-progress-ring.c',
-  'src/presentation/widgets/vdl-speed-graph.c',
-  'src/presentation/widgets/vdl-sidebar.c',
-  'src/presentation/widgets/vdl-headerbar.c',
-  'src/presentation/dialogs/vdl-add-download-dialog.c',
-  'src/presentation/dialogs/vdl-preferences-dialog.c',
-)
-
-all_sources = [
+# Source files
+sources = files(
   'src/main.c',
-  core_sources,
-  domain_sources,
-  data_sources,
-  engine_c_sources,
-  engine_cpp_sources,
-  services_sources,
-  presentation_sources,
-  resources,
-]
+  'src/app/vxap_app.c',
+  'src/app/vxap_config.c',
+  'src/ui/window/main_window.c',
+  'src/ui/window/add_dialog.c',
+  'src/ui/widgets/download_row.c',
+  'src/ui/widgets/sidebar.c',
+  'src/ui/widgets/statusbar.c',
+  'src/aria2/aria2_client.c',
+  'src/aria2/aria2_types.c',
+  'src/aria2/aria2_monitor.c',
+  'src/core/download_manager.c',
+  'src/core/download_queue.c',
+  'src/core/utils.c',
+)
 
-all_deps = [
-  gtk4_dep,
-  libadwaita_dep,
-  libcurl_dep,
-  sqlite3_dep,
-  libnotify_dep,
-  threads_dep,
-  json_glib_dep,
-  openssl_dep,
-  math_dep,
-  libtorrent_dep,
-]
+include_dirs = include_directories('src')
 
 executable('vxap-downloader',
-  all_sources,
-  dependencies: all_deps,
-  include_directories: include_directories('src'),
+  sources,
+  resources,
+  include_directories: include_dirs,
+  dependencies: deps,
   install: true,
 )
 
-# Install data files
-install_data(
-  'data/org.vaxp.downloader.desktop',
-  install_dir: get_option('datadir') / 'applications',
+# GSettings schema
+install_data('data/com.vxap.downloader.gschema.xml',
+  install_dir: get_option('datadir') / 'glib-2.0' / 'schemas'
 )
 
-install_data(
-  'data/icons/org.vaxp.downloader.svg',
-  install_dir: get_option('datadir') / 'icons' / 'hicolor' / 'scalable' / 'apps',
+# Desktop file
+install_data('data/com.vxap.downloader.desktop',
+  install_dir: get_option('datadir') / 'applications'
 )

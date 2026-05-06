@@ -1,0 +1,236 @@
+/* ══════════════════════════════════════════════
+   VXAP Downloader — Professional Dark Theme CSS
+   ══════════════════════════════════════════════ */
+
+/* ── Design Tokens ── */
+@define-color accent #5294e2;
+@define-color accent_hover #7cb3f0;
+@define-color bg_primary #1e1e2e;
+@define-color bg_surface #27273d;
+@define-color bg_card #313149;
+@define-color border_color rgba(255, 255, 255, 0.08);
+@define-color text_primary #cdd6f4;
+@define-color text_muted #6c7086;
+@define-color success_color #a6e3a1;
+@define-color warning_color #f9e2af;
+@define-color error_color #f38ba8;
+
+/* ── Window ── */
+.main-window,
+window {
+    background-color: rgba(0, 0, 0, 0.315);
+    color: @text_primary;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.sidebar-header {
+    font-size: 1.05em;
+    font-weight: 700;
+    color: @accent;
+    letter-spacing: 0.04em;
+}
+
+.navigation-sidebar row {
+    border-radius: 6px;
+    margin: 2px 8px;
+    transition: background-color 150ms ease;
+}
+
+.navigation-sidebar row:hover {
+    background-color: rgba(82, 148, 226, 0.12);
+}
+
+.navigation-sidebar row:selected {
+    background-color: rgba(82, 148, 226, 0.25);
+    color: @accent_hover;
+}
+
+/* ── Header Bar ── */
+headerbar {
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: none;
+}
+
+headerbar button.suggested-action {
+    background-color: @accent;
+    color: #fff;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-weight: 600;
+}
+
+headerbar button.suggested-action:hover {
+    background-color: @accent_hover;
+}
+
+/* ── Search Entry ── */
+searchentry {
+    background-color: @bg_card;
+    border: 1px solid @border_color;
+    border-radius: 12px;
+    color: @text_primary;
+    caret-color: @accent;
+}
+
+searchentry:focus {
+    border-color: @accent;
+    box-shadow: 0 0 0 2px rgba(82, 148, 226, 0.25);
+}
+
+/* ── Download List ── */
+.download-list {
+    background-color: transparent;
+}
+
+.download-list>row {
+    background-color: transparent;
+    border-bottom: 1px solid @border_color;
+    padding: 0;
+}
+
+.download-list>row:last-child {
+    border-bottom: none;
+}
+
+.download-list>row:hover .download-row {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.download-list>row:selected .download-row {
+    background-color: rgba(82, 148, 226, 0.10);
+}
+
+/* ── Download Row ── */
+.download-row {
+    border-radius: 12px;
+    transition: background-color 200ms ease;
+}
+
+.download-row.state-complete {
+    border-left: 3px solid @success_color;
+}
+
+.download-row.state-error {
+    border-left: 3px solid @error_color;
+}
+
+.download-row.state-active {
+    border-left: 3px solid @accent;
+}
+
+.download-row.state-paused {
+    border-left: 3px solid @warning_color;
+}
+
+.download-name {
+    font-size: 0.95em;
+    font-weight: 600;
+    color: @text_primary;
+}
+
+.download-meta {
+    font-size: 0.82em;
+    color: @text_muted;
+}
+
+/* ── Progress Bar ── */
+.download-progress {
+    min-height: 6px;
+    border-radius: 3px;
+}
+
+.download-progress trough {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    min-height: 6px;
+}
+
+.download-progress progress {
+    background-color: @accent;
+    border-radius: 3px;
+    min-height: 6px;
+}
+
+.state-complete .download-progress progress {
+    background-color: @success_color;
+}
+
+.state-error .download-progress progress {
+    background-color: @error_color;
+}
+
+/* ── Action Buttons ── */
+button.circular {
+    border-radius: 50%;
+    min-width: 32px;
+    min-height: 32px;
+    padding: 4px;
+    background-color: transparent;
+    color: @text_muted;
+    transition: all 150ms ease;
+}
+
+button.circular:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: @text_primary;
+}
+
+button.circular.destructive-action:hover {
+    background-color: rgba(243, 139, 168, 0.18);
+    color: @error_color;
+}
+
+/* ── Status Bar ── */
+.statusbar {
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 0.85em;
+    color: @text_muted;
+    min-height: 32px;
+    border-top: none;
+}
+
+.statusbar-count {
+    font-weight: 600;
+    color: @accent;
+}
+
+/* ── Add Dialog ── */
+.url-entry {
+    font-family: monospace;
+    background-color: @bg_card;
+    border: 1px solid @border_color;
+    border-radius: 6px;
+    color: @text_primary;
+    padding: 8px 12px;
+}
+
+.url-entry:focus {
+    border-color: @accent;
+}
+
+/* ── Dim label (empty state) ── */
+.dim-label {
+    color: @text_muted;
+    opacity: 0.6;
+}
+
+/* ── Scrollbars ── */
+scrollbar {
+    background-color: transparent;
+}
+
+scrollbar slider {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    min-width: 6px;
+    min-height: 6px;
+    margin: 2px;
+}
+
+scrollbar slider:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}

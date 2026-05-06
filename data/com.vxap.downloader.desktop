@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=VXAP Downloader
+Name[ar]=مدير التحميلات VXAP
+GenericName=Download Manager
+GenericName[ar]=مدير التحميلات
+Comment=Fast and powerful download manager powered by aria2
+Comment[ar]=مدير تحميلات سريع وقوي يعمل بمحرك aria2
+Exec=vxap-downloader %U
+Icon=com.vxap.downloader
+Terminal=false
+Type=Application
+Categories=Network;FileTransfer;GTK;
+MimeType=application/x-bittorrent;x-scheme-handler/magnet;
+Keywords=download;downloader;aria2;ftp;http;torrent;
+StartupNotify=true
+StartupWMClass=vxap-downloader

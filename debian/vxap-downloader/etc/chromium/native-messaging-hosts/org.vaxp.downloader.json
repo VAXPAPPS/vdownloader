@@ -1,9 +1,0 @@
-{
-    "name": "org.vaxp.downloader",
-    "description": "Vdownloader Native Messaging Host",
-    "path": "/usr/lib/vxap-downloader/vdl-native-host.py",
-    "type": "stdio",
-    "allowed_origins": [
-        "chrome-extension://APPLICATION_ID_HERE/"
-    ]
-}
