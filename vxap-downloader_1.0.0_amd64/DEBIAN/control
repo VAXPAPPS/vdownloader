@@ -1,0 +1,7 @@
+Package: vxap-downloader
+Version: 1.0.0
+Architecture: amd64
+Maintainer: Vaxp Developer <developer@vaxp.com>
+Description: Vaxp Download Manager
+ A fast and lightweight download manager built with GTK4 and C.
+Depends: libgtk-4-1, libadwaita-1-0, libcurl4, libjson-glib-1.0-0, libnotify4, aria2

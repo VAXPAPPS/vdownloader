@@ -1,5 +1,5 @@
 project('vxap-downloader', 'c',
-  version: '1.0.0',
+  version: '0.1.0',
   meson_version: '>= 0.60.0',
   default_options: [
     'c_std=c17',
@@ -56,6 +56,7 @@ sources = files(
   'src/core/download_manager.c',
   'src/core/download_queue.c',
   'src/core/utils.c',
+  'src/ui/theme_manager.c',
 )
 
 include_dirs = include_directories('src')
@@ -76,4 +77,10 @@ install_data('data/com.vxap.downloader.gschema.xml',
 # Desktop file
 install_data('data/com.vxap.downloader.desktop',
   install_dir: get_option('datadir') / 'applications'
+)
+
+# Icon file
+install_data('vdownloader.svg',
+  rename: 'com.vxap.downloader.svg',
+  install_dir: get_option('datadir') / 'icons' / 'hicolor' / 'scalable' / 'apps'
 )

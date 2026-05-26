@@ -4,6 +4,7 @@
 #include "core/download_manager.h"
 #include "ui/window/main_window.h"
 #include <gtk/gtk.h>
+#include "ui/theme_manager.h"
 
 #ifdef HAVE_ADWAITA
 #include <adwaita.h>
@@ -54,6 +55,9 @@ vxap_app_activate (GApplication *app)
     adw_style_manager_set_color_scheme (sm,
         p->config->dark_mode ? ADW_COLOR_SCHEME_FORCE_DARK : ADW_COLOR_SCHEME_DEFAULT);
 #endif
+
+    /* Initialize dynamic theme manager */
+    theme_manager_init();
 
     /* Connect to aria2 */
     p->aria2 = aria2_client_new (p->config->aria2_host,

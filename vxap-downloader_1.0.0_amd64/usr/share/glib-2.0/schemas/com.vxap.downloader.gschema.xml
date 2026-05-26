@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="com.vxap.downloader" path="/com/vxap/downloader/">
+    <key name="download-folder" type="s">
+      <default>""</default>
+      <summary>Default download folder</summary>
+    </key>
+    <key name="max-concurrent-downloads" type="i">
+      <default>3</default>
+      <range min="1" max="20"/>
+      <summary>Maximum number of simultaneous downloads</summary>
+    </key>
+    <key name="max-connections-per-server" type="i">
+      <default>8</default>
+      <range min="1" max="16"/>
+      <summary>Maximum connections per server</summary>
+    </key>
+    <key name="aria2-host" type="s">
+      <default>"http://localhost"</default>
+      <summary>Aria2 RPC host</summary>
+    </key>
+    <key name="aria2-port" type="i">
+      <default>6800</default>
+      <range min="1024" max="65535"/>
+      <summary>Aria2 RPC port</summary>
+    </key>
+    <key name="aria2-secret-token" type="s">
+      <default>""</default>
+      <summary>Aria2 RPC secret token</summary>
+    </key>
+    <key name="dark-mode" type="b">
+      <default>true</default>
+      <summary>Enable dark theme</summary>
+    </key>
+  </schema>
+</schemalist>
